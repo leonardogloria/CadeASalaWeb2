@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 import { CourseService } from './services/course.service';
+import { DisciplineService } from './services/discipline.service';
 import { LocationService } from './services/location.service';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { LocationService } from './services/location.service';
   ],
   providers: [
     CourseService,
+    DisciplineService,
     LocationService
   ],
   bootstrap: [AppComponent]

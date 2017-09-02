@@ -18,11 +18,18 @@
   </div>
 
   <div *ngIf="showCourses" class="form-group">
-    <select ngModel class="form-control ng-pristine ng-valid ng-empty ng-touched">
+    <select ngModel (ngModelChange)="loadDisciplines($event)" class="form-control ng-pristine ng-valid ng-empty ng-touched">
       <option *ngFor="let course of courses" [ngValue]="course">
         {{ course.name }}
       </option>
     </select>
   </div>
 
+  <div *ngIf="showDisciplines" class="form-group">
+    <select ngModel (ngModelChange)="showInfo($event)" class="form-control ng-pristine ng-valid ng-empty ng-touched">
+      <option *ngFor="let discipline of disciplines" [ngValue]="discipline">
+        {{ discipline.discipline_name }}
+      </option>
+    </select>
+  </div>
 </div>
