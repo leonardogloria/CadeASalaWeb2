@@ -1,12 +1,28 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-5">
-      <img src="../assets/images/rsz_logo-02.png" alt="Cadê A Sala?">    
+      <img src="../assets/images/rsz_logo-02.png" alt="Cadê A Sala?">
     </div>
 
     <div class="col-lg-9 col-md-8 col-sm-7 title">
       <h1>Encontre agora o que procura!</h1>
     </div>
+  </div>
+
+  <div class="form-group">
+    <select ngModel (ngModelChange)="loadCourses($event)" class="form-control ng-pristine ng-valid ng-empty ng-touched">
+      <option *ngFor="let location of locations" [ngValue]="location">
+        {{ location.nome }}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="showCourses" class="form-group">
+    <select ngModel class="form-control ng-pristine ng-valid ng-empty ng-touched">
+      <option *ngFor="let course of courses" [ngValue]="course">
+        {{ course.name }}
+      </option>
+    </select>
   </div>
 
 </div>
