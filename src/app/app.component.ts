@@ -31,25 +31,21 @@ export class AppComponent implements OnInit {
   }
 
   loadCourses(location: Location) {
-    if (location !== undefined) {
-      this.courseService.getCourses(location.id).subscribe((courses) => {
-        this.courses = courses['Items'];
-      });
-    } else {
-      // Limpar o valor dos outros campos
-      this.selectedCourse = undefined;
-      this.selectedDiscipline = undefined;
-    }
+    // Limpar o valor dos outros campos
+    this.selectedCourse = undefined;
+    this.selectedDiscipline = undefined;
+
+    this.courseService.getCourses(location.id).subscribe((courses) => {
+      this.courses = courses['Items'];
+    });
   }
 
   loadDisciplines(course: Course) {
-    if (course !== undefined) {
-      this.disciplineService.getDisciplines(this.selectedLocation.id, course.id).subscribe((disciplines) => {
-        this.disciplines = disciplines['Items'];
-      });
-    } else {
-      // Limpar o valor dos outros campos
-      this.selectedDiscipline = undefined;
-    }
+    // Limpar o valor dos outros campos
+    this.selectedDiscipline = undefined;
+
+    this.disciplineService.getDisciplines(this.selectedLocation.id, course.id).subscribe((disciplines) => {
+      this.disciplines = disciplines['Items'];
+    });
   }
 }
