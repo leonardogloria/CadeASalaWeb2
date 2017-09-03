@@ -17,9 +17,9 @@ export class AppComponent implements OnInit {
   locations: Location[];
   courses: Course[];
   disciplines: Discipline[];
-  idLocation: number;
-  showCourses = false;
-  showDisciplines = false;
+  selectedLocation: Location;
+  selectedCourse: Course;
+  selectedDiscipline: Discipline;
 
   constructor(private locationService: LocationService, private courseService: CourseService,
               private disciplineService: DisciplineService) { }
@@ -31,20 +31,25 @@ export class AppComponent implements OnInit {
   }
 
   loadCourses(location: Location) {
-    this.idLocation = location.id;
-    this.showCourses = true;
-    this.courseService.getCourses(location.id).subscribe((courses) => {
-      this.courses = courses['Items'];
-    });
+    if (location !== undefined) {
+      this.courseService.getCourses(location.id).subscribe((courses) => {
+        this.courses = courses['Items'];
+      });
+    } else {
+      // Limpar o valor dos outros campos
+      this.selectedCourse = undefined;
+      this.selectedDiscipline = undefined;
+    }
   }
 
   loadDisciplines(course: Course) {
-    this.showDisciplines = true;
-    this.disciplineService.getDisciplines(this.idLocation, course.id).subscribe((disciplines) => {
-      this.disciplines = disciplines['Items'];
-    });
-  }
-
-  showInfo(discipline: Discipline) {
+    if (course !== undefined) {
+      this.disciplineService.getDisciplines(this.selectedLocation.id, course.id).subscribe((disciplines) => {
+        this.disciplines = disciplines['Items'];
+      });
+    } else {
+      // Limpar o valor dos outros campos
+      this.selectedDiscipline = undefined;
+    }
   }
 }
