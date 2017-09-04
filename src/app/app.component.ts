@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.getLocations().subscribe((locations) => {
-      this.locations = locations['Items'];
+      this.locations = this.ordenar(locations['Items'], 'nome');
     });
   }
 
@@ -36,8 +36,9 @@ export class AppComponent implements OnInit {
     this.selectedDiscipline = undefined;
 
     this.courseService.getCourses(location.id).subscribe((courses) => {
-      this.courses = courses['Items'];
+      this.courses = this.ordenar(courses['Items'], 'name');
     });
+
   }
 
   loadDisciplines(course: Course) {
@@ -45,7 +46,13 @@ export class AppComponent implements OnInit {
     this.selectedDiscipline = undefined;
 
     this.disciplineService.getDisciplines(this.selectedLocation.id, course.id).subscribe((disciplines) => {
-      this.disciplines = disciplines['Items'];
+      this.disciplines = this.ordenar(disciplines['Items'], 'discipline_name');
+    });
+  }
+
+  ordenar(array: any[], attributeName: string) {
+    return array.sort(function(a, b) {
+      return (a[attributeName] > b[attributeName]) ? 1 : ((b[attributeName] > a[attributeName]) ? -1 : 0);
     });
   }
 }
