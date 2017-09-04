@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-5">
-      <img src="../assets/images/rsz_logo-02.png" alt="Cadê A Sala?">    
+      <img src="../assets/images/rsz_logo-02.png" alt="Cadê A Sala?">
     </div>
 
     <div class="col-lg-9 col-md-8 col-sm-7 title">
@@ -9,4 +9,104 @@
     </div>
   </div>
 
+  <div class="row discipline-content">
+    <div class="form-group">
+      <select [(ngModel)]="selectedLocation" (ngModelChange)="loadCourses($event)"
+              class="form-control ng-pristine ng-valid ng-empty ng-touched">
+        <option [ngValue]="undefined" selected>Selecione a sua Localização</option>
+        <option *ngFor="let location of locations" [ngValue]="location">
+          {{ location.nome }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedLocation" class="form-group">
+      <select [(ngModel)]="selectedCourse" (ngModelChange)="loadDisciplines($event)"
+              class="form-control ng-pristine ng-valid ng-empty ng-touched">
+        <option [ngValue]="undefined" selected>Selecione o seu Curso</option>
+        <option *ngFor="let course of courses" [ngValue]="course">
+          {{ course.name }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedCourse" class="form-group">
+      <select [(ngModel)]="selectedDiscipline" class="form-control ng-pristine ng-valid ng-empty ng-touched">
+        <option [ngValue]="undefined" selected>Selecione a sua Disciplina</option>
+        <option *ngFor="let discipline of disciplines" [ngValue]="discipline">
+          {{ discipline.discipline_name }}
+        </option>
+      </select>
+    </div>
+
+    <h3 *ngIf="selectedCourse">{{selectedCourse.name}}</h3>
+
+    <div *ngIf="selectedDiscipline" class="discipline-block ng-scope">
+      <div class="header">
+        <h4>{{selectedDiscipline.discipline_name}}</h4>
+      </div>
+
+      <div class="row card">
+        <div class="col-lg-12">
+          <h4>Informações</h4>
+          <p class="ng-binding">Tutor: {{selectedDiscipline.presencial_tutor}}</p>
+          <h5 class="ng-binding">AD1 - Prazo de entrega: {{selectedDiscipline.ad1_deadline}}</h5>
+          <h5 class="ng-binding">AD2 - Prazo de entrega: {{selectedDiscipline.ad2_deadline}}</h5>
+          <h5 class="ng-binding">Horário: {{selectedDiscipline.tutorship_time}}</h5>
+          <h5 class="ng-binding">Sala: {{selectedDiscipline.tutorship_room}}</h5>
+        </div>
+      </div>
+
+      <div class="row card">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+          <div class="details type date">
+            <span>{{selectedDiscipline.ap1.date}}</span>
+          </div>
+        </div>
+        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 details">
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 type">
+            AP1
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10">
+            <p class="ng-binding">Local: </p>
+            <p class="ng-binding">Hora: {{selectedDiscipline.ap1.time}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row card">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+          <div class="details type date">
+            <span>{{selectedDiscipline.ap2.date}}</span>
+          </div>
+        </div>
+        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 details">
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 type">
+            AP1
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10">
+            <p class="ng-binding">Local: </p>
+            <p class="ng-binding">Hora: {{selectedDiscipline.ap2.time}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row card">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+          <div class="details type date">
+            <span>{{selectedDiscipline.ap3.date}}</span>
+          </div>
+        </div>
+        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 details">
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 type">
+            AP1
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10">
+            <p class="ng-binding">Local: </p>
+            <p class="ng-binding">Hora: {{selectedDiscipline.ap3.time}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
