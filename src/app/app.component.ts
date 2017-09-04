@@ -20,33 +20,42 @@ export class AppComponent implements OnInit {
   selectedLocation: Location;
   selectedCourse: Course;
   selectedDiscipline: Discipline;
+  locationLoading: boolean;
+  courseLoading: boolean;
+  disciplineLoading: boolean;
 
   constructor(private locationService: LocationService, private courseService: CourseService,
               private disciplineService: DisciplineService) { }
 
   ngOnInit() {
+    this.locationLoading = true;
     this.locationService.getLocations().subscribe((locations) => {
       this.locations = this.ordenar(locations['Items'], 'nome');
+      this.locationLoading = false;
     });
   }
 
   loadCourses(location: Location) {
+    this.courseLoading = true;
     // Limpar o valor dos outros campos
     this.selectedCourse = undefined;
     this.selectedDiscipline = undefined;
 
     this.courseService.getCourses(location.id).subscribe((courses) => {
       this.courses = this.ordenar(courses['Items'], 'name');
+      this.courseLoading = false;
     });
 
   }
 
   loadDisciplines(course: Course) {
+    this.disciplineLoading = true;
     // Limpar o valor dos outros campos
     this.selectedDiscipline = undefined;
 
     this.disciplineService.getDisciplines(this.selectedLocation.id, course.id).subscribe((disciplines) => {
       this.disciplines = this.ordenar(disciplines['Items'], 'discipline_name');
+      this.disciplineLoading = false;
     });
   }
 

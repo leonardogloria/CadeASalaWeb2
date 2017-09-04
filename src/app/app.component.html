@@ -10,33 +10,43 @@
   </div>
 
   <div class="row discipline-content">
-    <div class="form-group">
+    <div class="form-group flexbox">
       <select [(ngModel)]="selectedLocation" (ngModelChange)="loadCourses($event)"
-              class="form-control ng-pristine ng-valid ng-empty ng-touched">
+              class="form-control ng-pristine ng-valid ng-empty ng-touched"  [disabled]="locationLoading">
         <option [ngValue]="undefined" selected>Selecione a sua Localização</option>
         <option *ngFor="let location of locations" [ngValue]="location">
           {{ location.nome }}
         </option>
       </select>
+      <div [hidden]="!locationLoading">
+        <i class="fa fa-spinner fa-2x fa-spin"></i>
+      </div>
     </div>
 
-    <div *ngIf="selectedLocation" class="form-group">
+    <div *ngIf="selectedLocation" class="form-group flexbox">
       <select [(ngModel)]="selectedCourse" (ngModelChange)="loadDisciplines($event)"
-              class="form-control ng-pristine ng-valid ng-empty ng-touched">
+              class="form-control ng-pristine ng-valid ng-empty ng-touched" [disabled]="courseLoading">
         <option [ngValue]="undefined" selected>Selecione o seu Curso</option>
         <option *ngFor="let course of courses" [ngValue]="course">
           {{ course.name }}
         </option>
       </select>
+      <div [hidden]="!courseLoading">
+        <i class="fa fa-spinner fa-2x fa-spin"></i>
+      </div>
     </div>
 
-    <div *ngIf="selectedCourse" class="form-group">
-      <select [(ngModel)]="selectedDiscipline" class="form-control ng-pristine ng-valid ng-empty ng-touched">
+    <div *ngIf="selectedCourse" class="form-group flexbox">
+      <select [(ngModel)]="selectedDiscipline" class="form-control ng-pristine ng-valid ng-empty ng-touched"
+              [disabled]="disciplineLoading">
         <option [ngValue]="undefined" selected>Selecione a sua Disciplina</option>
         <option *ngFor="let discipline of disciplines" [ngValue]="discipline">
           {{ discipline.discipline_name }}
         </option>
       </select>
+      <div [hidden]="!disciplineLoading">
+        <i class="fa fa-spinner fa-2x fa-spin"></i>
+      </div>
     </div>
 
     <h3 *ngIf="selectedCourse">{{selectedCourse.name}}</h3>
