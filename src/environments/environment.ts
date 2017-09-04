@@ -4,5 +4,11 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+    region: 'us-east-1',
+
+    identityPoolId: 'us-east-1:1d3c1ec3-94ec-42ad-9b83-fae32e63068f',
+    userPoolId: 'us-east-1_lCntcMQjn',
+    
+    clientId: '4f4hnfimcbb8ete36sahovsm60',
 };
